@@ -38,3 +38,6 @@ def vih(request):
     }
 
     return render(request, 'vih.html', context)
+
+def mapa_vih(request):
+    return render(request, 'mapa_vih.html')

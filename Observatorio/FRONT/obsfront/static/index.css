@@ -1,32 +1,32 @@
  .u-section-1 {
-  background-image: url("images/measureshome.jpg");
+  background-image: url("images/2cSb4s.jpg");
   background-position: 50% 50%;
 }
 
 .u-section-1 .u-sheet-1 {
-  min-height: 500px;
+  min-height: 821px;
 }
 
 @media (max-width: 1199px) {
   .u-section-1 .u-sheet-1 {
-    min-height: 412px;
+    min-height: 677px;
   }
 }
 
 @media (max-width: 991px) {
   .u-section-1 .u-sheet-1 {
-    min-height: 316px;
+    min-height: 519px;
   }
 }
 
 @media (max-width: 767px) {
   .u-section-1 .u-sheet-1 {
-    min-height: 237px;
+    min-height: 389px;
   }
 }
 
 @media (max-width: 575px) {
   .u-section-1 .u-sheet-1 {
-    min-height: 149px;
+    min-height: 143px;
   }
 }

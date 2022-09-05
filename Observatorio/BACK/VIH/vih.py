@@ -1,7 +1,32 @@
 import pandas as pd
 from prophet import Prophet
 import pyrebase
+import requests
+import os
+import smtplib
+import ssl
+import json
+import plotly.express as px
 
+url = 'http://medata.gov.co/sites/default/files/medata_harvest_files/sivigila_vih.csv'
+r = requests.get(url, allow_redirects=True)
+open('vih.csv', 'wb').write(r.content)
+
+file_stat = os.stat('vih.csv')
+
+if file_stat.st_size < 300000:
+    context = ssl.create_default_context()
+
+    message = 'Se encontro un problema en la BD de VIH'
+    subject = 'Error en base de datos de VIH'
+    message = 'Subject: {}\n\n{}'.format(subject, message)
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls(context=context)
+    server.login('observatorioproyecto1@gmail.com', 'uwftzgqywensvpdm')
+    server.sendmail('observatorioproyecto1@gmail.com', 'edango09@gmail.com', message)
+    server.quit()
+    exit()
 
 config = {
     "apiKey": "AIzaSyApRDFW_LWlmChdsxpvDO7sRkR8Z7O6Bvc",
@@ -37,7 +62,6 @@ casos_sexo_lista = casos_sexo_lista.values.tolist()
 for i in range(0, 2):
     database.child('VIH').child("CasosXsexo").child(casos_sexo_lista[i][0]).set(casos_sexo_lista[i][1])
 
-
 casos_comuna = data.groupby(["comuna"]).count()['id']
 casos_comuna_lista = casos_comuna.to_frame()
 casos_comuna_lista.reset_index(inplace=True)
@@ -66,3 +90,35 @@ forecast = forecast.astype(convert_dict)
 prediccion = forecast[['ds', 'yhat']].tail(5).values.tolist()
 for i in range(1, 5):
     database.child('VIH').child("CasosXano").child(prediccion[i][0][0:4]).set(prediccion[i][1])
+
+# SISTEMA DE MAPAS
+
+comunas_medellin = json.load(open("./planeacion_gdb.geojson"))
+
+# Filtraccion de datos
+casos_comuna = data.groupby(["comuna"]).count()['id']
+casos_comuna = data.groupby(["comuna"]).count()['id']
+casos_comuna_lista = casos_comuna.to_frame()
+casos_comuna_lista.drop("Sin informacion", inplace=True)
+casos_comuna_lista.drop("SIN INFORMACION", inplace=True)
+casos_comuna_lista.reset_index(inplace=True)
+casos_comuna_lista
+
+# Correccion nombres comunas
+casos_comuna_lista.at[23, 'comuna'] = 'San Sebastian de Palmitas'
+comunas_medellin['features'][14]['properties']['NOMBRE'] = 'Belen'
+comunas_medellin['features'][11]['properties']['NOMBRE'] = 'La America'
+comunas_medellin['features'][10]['properties']['NOMBRE'] = 'Laureles'
+comunas_medellin['features'][16]['properties']['NOMBRE'] = 'Corregimiento de San Cristobal'
+comunas_medellin['features'][15]['properties']['NOMBRE'] = 'Corregimiento de Palmitas'
+
+# Creacion mapa
+mapa = px.choropleth_mapbox(casos_comuna_lista, geojson=comunas_medellin, locations="comuna",
+                            featureidkey='properties.NOMBRE'
+                            , color='id', mapbox_style="carto-positron", zoom=10.5,
+                            center={"lat": 6.25184, "lon": -75.56359},
+                            labels={'id': 'Casos de VIH'}, opacity=0.5)
+mapa.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+
+# Exportat mapa
+mapa.write_html('../../FRONT/obsfront/templates/mapa_vih.html')

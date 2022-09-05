@@ -22,4 +22,5 @@ urlpatterns = [
     path('', pagina.index),
     path('index.html', pagina.index),
     path('vih.html', pagina.vih),
+    path('mapa_vih.html', pagina.mapa_vih),
 ]
