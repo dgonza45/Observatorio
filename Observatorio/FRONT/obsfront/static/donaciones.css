@@ -1,0 +1,117 @@
+ .u-section-1 {
+  background-image: url("images/Sinttulo.jpg");
+  background-position: 50% 50%;
+}
+
+.u-section-1 .u-sheet-1 {
+  min-height: 768px;
+}
+
+.u-section-1 .u-text-1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 218px 20px 0;
+}
+
+.u-section-1 .u-icon-1 {
+  width: 297px;
+  height: 297px;
+  color: rgb(215, 90, 74) !important;
+  margin: 0 auto 0 402px;
+  padding: 0;
+}
+
+.u-section-1 .u-btn-1 {
+  text-transform: uppercase;
+  margin: -171px auto 0 467px;
+}
+
+.u-section-1 .u-text-2 {
+  font-weight: 700;
+  margin: 177px auto 60px 458px;
+}
+
+@media (max-width: 1199px) {
+  .u-section-1 .u-sheet-1 {
+    min-height: 633px;
+  }
+
+  .u-section-1 .u-text-1 {
+    width: auto;
+    margin-top: 417px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .u-section-1 .u-icon-1 {
+    margin-top: -514px;
+    margin-left: 331px;
+  }
+
+  .u-section-1 .u-btn-1 {
+    margin-top: -96px;
+    margin-left: 267px;
+    padding: 10px 8px;
+  }
+
+  .u-section-1 .u-text-2 {
+    width: auto;
+    margin-top: 60px;
+    margin-left: 378px;
+  }
+}
+
+@media (max-width: 991px) {
+  .u-section-1 .u-sheet-1 {
+    min-height: 485px;
+  }
+
+  .u-section-1 .u-icon-1 {
+    margin-left: 254px;
+  }
+
+  .u-section-1 .u-btn-1 {
+    margin-left: 47px;
+  }
+
+  .u-section-1 .u-text-2 {
+    margin-left: 290px;
+  }
+}
+
+@media (max-width: 767px) {
+  .u-section-1 .u-sheet-1 {
+    min-height: 364px;
+  }
+
+  .u-section-1 .u-icon-1 {
+    margin-left: 191px;
+  }
+
+  .u-section-1 .u-btn-1 {
+    margin-left: 0;
+  }
+
+  .u-section-1 .u-text-2 {
+    margin-left: 218px;
+  }
+}
+
+@media (max-width: 575px) {
+  .u-section-1 .u-sheet-1 {
+    min-height: 229px;
+  }
+
+  .u-section-1 .u-text-1 {
+    margin-top: 404px;
+  }
+
+  .u-section-1 .u-icon-1 {
+    margin-left: 120px;
+  }
+
+  .u-section-1 .u-text-2 {
+    margin-top: 23px;
+    margin-left: 137px;
+  }
+}
