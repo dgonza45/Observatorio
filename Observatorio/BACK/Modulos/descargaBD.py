@@ -6,7 +6,7 @@ import ssl
 
 def descarga(url, enfermedad):
     r = requests.get(url, allow_redirects=True)
-    open(enfermedad + '.csv', 'wb').write(r.content)
+    open(enfermedad+'.csv', 'wb').write(r.content)
     file_stat = os.stat(enfermedad + '.csv')
 
     if file_stat.st_size < 30000:
