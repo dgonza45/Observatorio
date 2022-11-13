@@ -22,18 +22,39 @@ urlpatterns = [
     path('', pagina.index),
     path('index.html', pagina.index),
     path('donaciones.html', pagina.donaciones),
+   
     path('vih.html', pagina.vih),
     path('mapa_vih.html', pagina.mapa_vih),
+    path('mapa_sexo_vih.html', pagina.mapa_sexo_vih),
+    path('mapa_edad_vih.html', pagina.mapa_edad_vih),
+    
     path('parotiditis.html', pagina.parotiditis),
     path('mapa_parotiditis.html', pagina.mapa_parotiditis),
+    path('mapa_sexo_parotiditis.html', pagina.mapa_sexo_parotiditis),
+    path('mapa_edad_parotiditis.html', pagina.mapa_edad_parotiditis),
+    
     path('hepatitisa.html', pagina.hepatitisa),
     path('mapa_hepatitisa.html', pagina.mapa_hepatitisa),
+    path('mapa_sexo_hepatitisa.html', pagina.mapa_sexo_hepatitisa),
+    path('mapa_edad_hepatitisa.html', pagina.mapa_edad_hepatitisa),
+   
     path('hepatitisc.html', pagina.hepatitisc),
     path('mapa_hepatitisc.html', pagina.mapa_hepatitisc),
+    path('mapa_sexo_hepatitisc.html', pagina.mapa_sexo_hepatitisc),
+    path('mapa_edad_hepatitisc.html', pagina.mapa_edad_hepatitisc),
+   
     path('dengue.html', pagina.dengue),
     path('mapa_dengue.html', pagina.mapa_dengue),
+    path('mapa_sexo_dengue.html', pagina.mapa_sexo_dengue),
+    path('mapa_edad_dengue.html', pagina.mapa_edad_dengue),
+   
     path('intentoSuicidio.html', pagina.intentoSuicidio),
     path('mapa_intentoSuicidio.html', pagina.mapa_intentoSuicidio),
+    path('mapa_sexo_intentoSuicidio.html', pagina.mapa_sexo_intentoSuicidio),
+    path('mapa_edad_intentoSuicidio.html', pagina.mapa_edad_intentoSuicidio),
+   
     path('cancerDeMama.html', pagina.cancerDeMama),
     path('mapa_cancerDeMama.html', pagina.mapa_cancerDeMama),
+    path('mapa_sexo_cancerDeMama.html', pagina.mapa_sexo_cancerDeMama),
+    path('mapa_edad_cancerDeMama.html', pagina.mapa_edad_cancerDeMama),
 ]

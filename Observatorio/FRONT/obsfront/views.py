@@ -26,42 +26,72 @@ def vih(request):
     return render(request, 'vih.html', context)
 def mapa_vih(request):
     return render(request, 'mapa_vih.html')
+def mapa_edad_vih(request):
+    return render(request, 'mapa_edad_vih.html')
+def mapa_sexo_vih(request):
+    return render(request, 'mapa_sexo_vih.html')
+
 
 def parotiditis(request):
     context = getfromdb('parotiditis')
     return render(request, 'parotiditis.html', context)
 def mapa_parotiditis(request):
     return render(request, 'mapa_parotiditis.html')
+def mapa_edad_parotiditis(request):
+    return render(request, 'mapa_edad_parotiditis.html')
+def mapa_sexo_parotiditis(request):
+    return render(request, 'mapa_sexo_parotiditis.html')
+
 
 def hepatitisa(request):
     context = getfromdb('hepatitisa')
     return render(request, 'hepatitisa.html', context)
 def mapa_hepatitisa(request):
     return render(request, 'mapa_hepatitisa.html')
+def mapa_edad_hepatitisa(request):
+    return render(request, 'mapa_edad_hepatitisa.html')
+def mapa_sexo_hepatitisa(request):
+    return render(request, 'mapa_sexo_hepatitisa.html')
 
 def hepatitisc(request):
     context = getfromdb('hepatitisc')
     return render(request, 'hepatitisc.html', context)
 def mapa_hepatitisc(request):
     return render(request, 'mapa_hepatitisc.html')
+def mapa_edad_hepatitisc(request):
+    return render(request, 'mapa_edad_hepatitisc.html')
+def mapa_sexo_hepatitisc(request):
+    return render(request, 'mapa_sexo_hepatitisc.html')
 
 def dengue(request):
     context = getfromdb('dengue')
     return render(request, 'dengue.html', context)
 def mapa_dengue(request):
     return render(request, 'mapa_dengue.html')
+def mapa_edad_dengue(request):
+    return render(request, 'mapa_edad_dengue.html')
+def mapa_sexo_dengue(request):
+    return render(request, 'mapa_sexo_dengue.html')
 
 def cancerDeMama(request):
     context = getfromdb('cancerDeMama')
     return render(request, 'cancerDeMama.html', context)
 def mapa_cancerDeMama(request):
     return render(request, 'mapa_cancerDeMama.html')
+def mapa_edad_cancerDeMama(request):
+    return render(request, 'mapa_edad_cancerDeMama.html')
+def mapa_sexo_cancerDeMama(request):
+    return render(request, 'mapa_sexo_cancerDeMama.html')
 
 def intentoSuicidio(request):
     context = getfromdb('intentoSuicidio')
     return render(request, 'intentoSuicidio.html', context)
 def mapa_intentoSuicidio(request):
     return render(request, 'mapa_intentoSuicidio.html')
+def mapa_edad_intentoSuicidio(request):
+    return render(request, 'mapa_edad_intentoSuicidio.html')
+def mapa_sexo_intentoSuicidio(request):
+    return render(request, 'mapa_sexo_intentoSuicidio.html')
 
 def getfromdb(enfermedad):
     casosxano2015 = database.child(enfermedad).child('CasosXano').child('2015').get().val()

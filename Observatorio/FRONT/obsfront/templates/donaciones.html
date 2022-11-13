@@ -96,18 +96,105 @@ c0-7.4,3.4-18.8,18.8-18.8h13.8v15.4H75.5z"></path></svg></span>
           </div>
         </nav>
       </div></header>
-    <section class="u-align-center u-clearfix u-image u-section-1" src="" data-image-width="2034" data-image-height="1080" id="sec-b4ad">
-      <div class="u-align-center u-clearfix u-sheet u-sheet-1">
-        <p class="u-align-center-lg u-align-center-md u-align-center-sm u-align-center-xs u-custom-font u-font-roboto-slab u-text u-text-1">Tus donaciones son muy importantes para nosotros, nos ayudan a mantener viva la pagina y seguir adelante con este gran proyecto.</p><span class="u-icon u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 50 50" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-06be"></use></svg><svg class="u-svg-content" viewBox="0 0 50 50" x="0px" y="0px" id="svg-06be" style="enable-background:new 0 0 50 50;"><path style="fill:currentColor;" d="M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543
-	c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503
-	c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z"></path></svg></span>
-        <a href="https://www.paypal.com/co/home" class="u-border-none u-btn u-button-style u-btn-1">DONAR AHORA</a>
-        <h2 class="u-custom-font u-font-roboto-slab u-text u-text-default u-text-2">GRACIAS!!!</h2>
-      </div>
-    </section>
     
     
-    <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-5118"><div class="u-align-left u-clearfix u-sheet u-sheet-1"></div></footer>
+    <footer class="u-align-center u-clearfix u-footer u-blue-80 u-footer" id="sec-5118"><div class="u-align-left u-clearfix u-sheet u-sheet-1"></div></footer>
     
   
 </body></html>
+
+<div id="smart-button-container">
+  <div style="text-align: center;">
+    <div style="margin-bottom: 1.25rem;">
+      <p>Tus donaciones son muy importantes para nosotros, nos ayudan a mantener la pagina y seguir adelante con este gran proyecto.</p>
+      <select id="item-options"><option value="Granitos de arena" price="1">Granitos de arena - 1 USD</option></select>
+      <select style="visibility: hidden" id="quantitySelect"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>
+    </div>
+  <div id="paypal-button-container"></div>
+  </div>
+</div>
+<script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+<script>
+  function initPayPalButton() {
+    var shipping = 0;
+    var itemOptions = document.querySelector("#smart-button-container #item-options");
+var quantity = parseInt(10);
+var quantitySelect = document.querySelector("#smart-button-container #quantitySelect");
+if (!isNaN(quantity)) {
+  quantitySelect.style.visibility = "visible";
+}
+var orderDescription = 'Tus donaciones son muy importantes para nosotros, nos ayudan a mantener la pagina y seguir adelante con este gran proyecto.';
+if(orderDescription === '') {
+  orderDescription = 'Item';
+}
+paypal.Buttons({
+  style: {
+    shape: 'rect',
+    color: 'gold',
+    layout: 'vertical',
+    label: 'donate',
+    
+  },
+  createOrder: function(data, actions) {
+    var selectedItemDescription = itemOptions.options[itemOptions.selectedIndex].value;
+    var selectedItemPrice = parseFloat(itemOptions.options[itemOptions.selectedIndex].getAttribute("price"));
+    var tax = (0 === 0 || true) ? 0 : (selectedItemPrice * (parseFloat(0)/100));
+    if(quantitySelect.options.length > 0) {
+      quantity = parseInt(quantitySelect.options[quantitySelect.selectedIndex].value);
+    } else {
+      quantity = 1;
+    }
+
+    tax *= quantity;
+    tax = Math.round(tax * 100) / 100;
+    var priceTotal = quantity * selectedItemPrice + parseFloat(shipping) + tax;
+    priceTotal = Math.round(priceTotal * 100) / 100;
+    var itemTotalValue = Math.round((selectedItemPrice * quantity) * 100) / 100;
+
+    return actions.order.create({
+      purchase_units: [{
+        description: orderDescription,
+        amount: {
+          currency_code: 'USD',
+          value: priceTotal,
+          breakdown: {
+            item_total: {
+              currency_code: 'USD',
+              value: itemTotalValue,
+            }
+          }
+        },
+        items: [{
+          name: selectedItemDescription,
+          unit_amount: {
+            currency_code: 'USD',
+            value: selectedItemPrice,
+          },
+          quantity: quantity,
+          category: 'DONATION'
+        }]
+      }]
+    });
+  },
+  onApprove: function(data, actions) {
+    return actions.order.capture().then(function(orderData) {
+      
+      // Full available details
+      console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+      // Show a success message within this page, e.g.
+      const element = document.getElementById('paypal-button-container');
+      element.innerHTML = '';
+      element.innerHTML = '<h3>Thank you for your payment!</h3>';
+
+      // Or go to another URL:  actions.redirect('thank_you.html');
+
+    });
+  },
+  onError: function(err) {
+    console.log(err);
+  },
+}).render('#paypal-button-container');
+}
+initPayPalButton();
+</script>
