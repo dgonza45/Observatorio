@@ -16,7 +16,7 @@ def descarga(url, enfermedad):
         message = 'Subject: {}\n\n{}'.format(subject, message)
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls(context=context)
-        server.login('observatorioproyecto1@gmail.com', 'uwftzgqywensvpdm')
+        server.login('observatorioproyecto1@gmail.com', '')
         server.sendmail('observatorioproyecto1@gmail.com', 'nnnn@gmail.com', message)
         server.quit()
         exit()
